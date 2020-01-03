@@ -4,11 +4,11 @@ const contactPage = () => {
   return (
     <div>
       <h1>Contact me</h1>
-      <li>
-        <ul>Email</ul>
-        <ul>LinkedIn</ul>
-        <ul>Github</ul>
-      </li>
+      <ul>
+        <li>Email</li>
+        <li>LinkedIn</li>
+        <li>Github</li>
+      </ul>
     </div>
   )
 }
