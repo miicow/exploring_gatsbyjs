@@ -1,7 +1,16 @@
 import React from "react"
+import Footer from "../components/footer"
+import Header from "../components/header"
 
-const Layout = () => {
-  return <div></div>
+//in react we get access to content of a component via props children
+const Layout = props => {
+  return (
+    <div>
+      <Header />
+      {props.children}
+      <Footer />
+    </div>
+  )
 }
 
 export default Layout
