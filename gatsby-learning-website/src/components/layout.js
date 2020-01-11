@@ -1,6 +1,7 @@
 import React from "react"
 import Footer from "../components/footer"
 import Header from "../components/header"
+import "../styles/index.scss"
 
 //in react we get access to content of a component via props children
 const Layout = props => {

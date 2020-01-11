@@ -3,7 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
-
+//nodejs file - uses module.export
 module.exports = {
-  /* Your site config here */
+  plugins: ["gatsby-plugin-sass"],
 }
