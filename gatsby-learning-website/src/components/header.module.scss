@@ -4,7 +4,34 @@
   a) it is an object with the styles defined as properties
   b) access the property using dot notation on the file where you import the module
 */
+.header {
+  padding: 1rem 0 3rem;
+}
 
-.link {
+.title {
+  color: #000000;
+  font-size: 3rem;
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex; //stack the items left to right, since default flex-direction is row;
+  list-style-type: none; //removes bullets from ul/li element
+  margin: 0; //clears the default margin values from li element
+}
+
+.nav-item {
   color: #999999;
+  font-size: 0.9rem;
+  margin-right: 1.3rem; //prevent items from jamming right next to each other
+  text-decoration: none; //remove underline effect
+}
+
+.nav-item:hover {
+  color: #666666;
+}
+
+//visual cue - allow to user know which page they are on
+.active-nav-item {
+  color: #333333;
 }
