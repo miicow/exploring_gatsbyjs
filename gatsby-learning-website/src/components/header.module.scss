@@ -1,0 +1,10 @@
+/* 
+1)using module styles applies to elements that are locally scoped
+2)with with .module extension, it comes with a default export
+  a) it is an object with the styles defined as properties
+  b) access the property using dot notation on the file where you import the module
+*/
+
+.link {
+  color: #999999;
+}
