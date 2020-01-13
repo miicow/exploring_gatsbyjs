@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 //Link is a react component to link between pages with our gatsby site - optimization happening behind the scenes
 //gatsby preloads the content of the page to load instantly without the "flash" of rerendering
 
-const indexPage = () => {
+const IndexPage = () => {
   return (
     <Layout>
       {/* only need unique content inside layout component */}
@@ -17,4 +17,4 @@ const indexPage = () => {
   )
 }
 
-export default indexPage
+export default IndexPage
