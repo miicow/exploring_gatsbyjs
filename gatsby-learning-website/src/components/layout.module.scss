@@ -1,0 +1,13 @@
+.container {
+  margin: 0 auto; //centers things left and right
+  max-width: 750px;
+  padding: 1rem; //prevents content from pressing against edge of browser
+
+  display: flex; //enable flexbox
+  flex-direction: column; //because we want the content above the footer, not left to right. since default is row
+  min-height: 100vh; //viewport height, 100vh sets it to screen height - since its min-height it can be longer on bigger screens
+}
+
+.content {
+  flex-grow: 1; // this allows the container with the className to grow when needed. leaving enough space for footer in place.
+}

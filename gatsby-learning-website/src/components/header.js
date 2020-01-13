@@ -6,6 +6,7 @@ import headerStyles from "./header.module.scss"
 2) explicitly importing specific file and set of style
 3) applying directly to the element
 4) prevent the possibility of collision with other global components from other files 
+5) when you inspect the element - {headerStyles.link} generates a unique class name
 */
 
 const Header = () => {
