@@ -1,6 +1,7 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
 import headerStyles from "./header.module.scss"
+
 /* 
 1) using css module is being very explicit in how we are using styles.
 2) explicitly importing specific file and set of style
@@ -10,11 +11,22 @@ import headerStyles from "./header.module.scss"
 */
 
 const Header = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
+  //destructing
+  const { title } = data.site.siteMetadata
   return (
     <header className={headerStyles.header}>
       <h1>
         <Link className={headerStyles.title} to="/">
-          Michael Su
+          {title}
         </Link>
       </h1>
 
