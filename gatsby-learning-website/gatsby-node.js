@@ -3,25 +3,26 @@
 */
 const path = require("path")
 
-module.exports.onCreateNode = ({ node, actions }) => {
-  //a node is a data structure for storing gatsby data
-  const { createNodeField } = actions
+//##################### No longer needed because we have slug field in contentful#####################
+// module.exports.onCreateNode = ({ node, actions }) => {
+//   //a node is a data structure for storing gatsby data
+//   const { createNodeField } = actions
 
-  if (node.internal.type === "MarkdownRemark") {
-    /* 
-    using path.basename from nodejs - we can retrieve the last portion of a path 
-    which the path of the markdown we want is located in node.fileAbsolutePath
-    */
-    const slug = path.basename(node.fileAbsolutePath, ".md")
+//   if (node.internal.type === "MarkdownRemark") {
+//     /*
+//     using path.basename from nodejs - we can retrieve the last portion of a path
+//     which the path of the markdown we want is located in node.fileAbsolutePath
+//     */
+//     const slug = path.basename(node.fileAbsolutePath, ".md")
 
-    createNodeField({
-      //shorthand property - setting the property equal to a variable of the same name
-      node,
-      name: "slug",
-      value: slug,
-    })
-  }
-}
+//     createNodeField({
+//       //shorthand property - setting the property equal to a variable of the same name
+//       node,
+//       name: "slug",
+//       value: slug,
+//     })
+//   }
+// }
 
 //this graphql is different from the one imported from gatsby
 //this is function that we pass an string into
@@ -36,12 +37,10 @@ module.exports.createPages = async ({ graphql, actions }) => {
   //graphql function returns a promise
   const res = await graphql(`
     query {
-      allMarkdownRemark {
+      allContentfulBlogPost {
         edges {
           node {
-            fields {
-              slug
-            }
+            slug
           }
         }
       }
@@ -51,13 +50,14 @@ module.exports.createPages = async ({ graphql, actions }) => {
   //1. Get path to template
   //2. Get markdown data
   //3. Create new page
-  res.data.allMarkdownRemark.edges.forEach(edge => {
+  res.data.allContentfulBlogPost.edges.forEach(edge => {
+    const { slug } = edge.node
     createPage({
       //component we are trying to render, not a react component but a path to the component which we have in blogTemplate
       component: blogTemplate,
-      path: `/blog/${edge.node.fields.slug}`,
+      path: `/blog/${slug}`,
       context: {
-        slug: edge.node.fields.slug,
+        slug,
       },
     })
   })
