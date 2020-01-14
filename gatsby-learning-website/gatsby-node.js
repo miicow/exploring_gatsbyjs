@@ -22,3 +22,43 @@ module.exports.onCreateNode = ({ node, actions }) => {
     })
   }
 }
+
+//this graphql is different from the one imported from gatsby
+//this is function that we pass an string into
+module.exports.createPages = async ({ graphql, actions }) => {
+  //createPage will be called everytime we are trying to create a new blog page
+  const { createPage } = actions
+
+  //the arguement passed into resolve is current location to destination
+  //the resolve function will add everything else in the front to create an absolute path from the root of the harddrive
+  const blogTemplate = path.resolve("./src/templates/blog.js")
+
+  //graphql function returns a promise
+  const res = await graphql(`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  //1. Get path to template
+  //2. Get markdown data
+  //3. Create new page
+  res.data.allMarkdownRemark.edges.forEach(edge => {
+    createPage({
+      //component we are trying to render, not a react component but a path to the component which we have in blogTemplate
+      component: blogTemplate,
+      path: `/blog/${edge.node.fields.slug}`,
+      context: {
+        slug: edge.node.fields.slug,
+      },
+    })
+  })
+}
