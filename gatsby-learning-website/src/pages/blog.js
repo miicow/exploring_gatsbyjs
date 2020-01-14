@@ -13,8 +13,6 @@ const BlogPage = () => {
                 title
                 date
               }
-              html
-              excerpt
             }
           }
         }
@@ -24,8 +22,19 @@ const BlogPage = () => {
 
   return (
     <Layout>
-      <h1>My Blog</h1>
-      <p>This is currently a place holder.</p>
+      <h1>Blog</h1>
+      <ol>
+        {data.allMarkdownRemark.edges.map((edge, i) => {
+          const { title, date } = edge.node.frontmatter
+
+          return (
+            <li key={i}>
+              <h2>{title}</h2>
+              <p>{date}</p>
+            </li>
+          )
+        })}
+      </ol>
     </Layout>
   )
 }
