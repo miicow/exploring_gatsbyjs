@@ -1,19 +1,32 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Layout from "../components/layout"
 
 //useStaticQuery is not being imported because template file works differently
 //we are defining our query seperately then export it
 //we cant access the context which contains our slug, if we were to useStaticQuery
 //to export it as named export, export is added before const
+// export const query = graphql`
+//   query($slug: String!) {
+//     markdownRemark(fields: { slug: { eq: $slug } }) {
+//       frontmatter {
+//         title
+//         date
+//       }
+//       html
+//     }
+//   }
+// `
+
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      frontmatter {
-        title
-        date
+    contentfulBlogPost(slug: { eq: $slug }) {
+      title
+      publishedDate(formatString: "MMMM Do, YYYY")
+      body {
+        json
       }
-      html
     }
   }
 `
@@ -22,15 +35,23 @@ export const query = graphql`
 //then it is going to take the response, all of the post data and provide it as a react prop
 
 const Blog = props => {
-  const { title, date } = props.data.markdownRemark.frontmatter
-  const { html } = props.data.markdownRemark
-
+  const { title, publishedDate, body } = props.data.contentfulBlogPost
+  const options = {
+    //overwrite how specific nodes are rendered, there was various node types in the JSON data
+    renderNode: {
+      "embedded-asset-block": node => {
+        const { title, file } = node.data.target.fields
+        const alt = title["en-US"]
+        const url = file["en-US"].url
+        return <img alt={alt} src={url} />
+      },
+    },
+  }
   return (
     <Layout>
       <h1>{title}</h1>
-      <p>{date}</p>
-
-      <div dangerouslySetInnerHTML={{ __html: html }}></div>
+      <p>{publishedDate}</p>
+      {documentToReactComponents(body.json, options)}
     </Layout>
   )
 }
