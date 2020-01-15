@@ -6,7 +6,7 @@ require("dotenv").config({
 module.exports = {
   //naming has to be exactly as shown below - other gatsby wont find it
   siteMetadata: {
-    title: "Exploring Gatsby Site!",
+    title: "Example Site",
     author: "Michael Su",
   },
 

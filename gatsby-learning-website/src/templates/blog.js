@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Layout from "../components/layout"
+import Head from "../components/head"
 
 //useStaticQuery is not being imported because template file works differently
 //we are defining our query seperately then export it
@@ -49,6 +50,7 @@ const Blog = props => {
   }
   return (
     <Layout>
+      <Head componentTitle={title} />
       <h1>{title}</h1>
       <p>{publishedDate}</p>
       {documentToReactComponents(body.json, options)}
