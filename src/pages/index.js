@@ -12,9 +12,6 @@ const IndexPage = () => {
       {/* only need unique content inside layout component */}
       <h1>Hello</h1>
       <h2>I'm Michael</h2>
-      <p>
-        <Link to="/contact">Contact Me.</Link>
-      </p>
     </Layout>
   )
 }
